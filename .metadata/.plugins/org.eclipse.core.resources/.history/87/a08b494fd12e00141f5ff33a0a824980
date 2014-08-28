@@ -10,35 +10,25 @@ public class PayRole {
 	public String getGrossPay() {
 		return grossPay.toPlainString();
 	}
-	
 	public void setGrossPay(String sHoursWorked, String sHourlyRate) {
 		
-		// Convert hoursWorked and hourlyRate to BigDecimal
-		BigDecimal hoursWorked = new BigDecimal(sHoursWorked); 
+		BigDecimal hoursWorked = new BigDecimal(sHoursWorked);
 		BigDecimal hourlyRate = new BigDecimal(sHourlyRate);
 		BigDecimal grossPay;
-		
-		// Calculate Gross pay (hoursWorked*HourlyRate)
 		grossPay = hoursWorked.multiply(hourlyRate, mc);
 		
 		this.grossPay = grossPay;
 	}
-	
 	public String getNetPay() {
 		return netPay.toPlainString();
 	}
-	
 	public void setNetPay(String grossPay) {
-		//Determine tax rate
 		String sTaxRate = taxRate(grossPay);
-		//Convert taxRate to Big Decimal
 		BigDecimal taxRate = new BigDecimal(sTaxRate);
-		//Calculate and assign netPay (grossPay-(grossPay*taxRate))
-		this.netPay = this.grossPay.subtract(this.grossPay.multiply(taxRate));
+		this.netPay = this.grossPay.multiply(taxRate, mc);
 	}
 	
 	private String taxRate(String aGrossPay){
-		//Parse aGrossPay into a double
 		double grossPay = Double.valueOf(aGrossPay).doubleValue();
 		String taxRate = "-1";
 		

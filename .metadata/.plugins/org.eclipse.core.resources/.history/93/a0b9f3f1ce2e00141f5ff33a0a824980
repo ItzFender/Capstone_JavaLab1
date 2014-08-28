@@ -1,0 +1,29 @@
+import java.math.BigDecimal;
+import java.math.MathContext;
+
+
+public class PayRole {
+	private BigDecimal grossPay;
+	private BigDecimal netPay;
+	private MathContext mc = new MathContext(2); // 2 precision
+	
+	public String getGrossPay() {
+		return grossPay.toPlainString();
+	}
+	public void setGrossPay(String sHoursWorked, String sHourlyRate) {
+		
+		BigDecimal hoursWorked = new BigDecimal(sHoursWorked);
+		BigDecimal hourlyRate = new BigDecimal(sHourlyRate);
+		BigDecimal grossPay;
+		grossPay = hoursWorked.multiply(hourlyRate, mc);
+		
+		this.grossPay = grossPay;
+	}
+	public String getNetPay() {
+		return netPay.toPlainString();
+	}
+	public void setNetPay(BigDecimal netPay) {
+		this.netPay = netPay;
+	}
+	
+}
